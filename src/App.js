@@ -21,6 +21,7 @@ export default class App extends Component {
   searchUsers = async text => {
     this.setState({ loading: true });
 
+    // https://api.github.com/search/users?q=brad
     const res = await axios.get(
       `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
@@ -32,6 +33,7 @@ export default class App extends Component {
   getUser = async username => {
     this.setState({ loading: true });
 
+    // https://api.github.com/users/bradtraversy
     const res = await axios.get(
       `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
