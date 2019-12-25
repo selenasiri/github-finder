@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types'; // impt
+import GithubContext from '../../context/github/githubContext';
 
 // rafce -- React Arrow Function Component with export default at the End
-const Search = ({ searchUsers, clearUsers, showClear, setAlert }) => {
+const Search = ({ setAlert }) => {
+  const githubContext = useContext(GithubContext);
+  const { users, clearUsers, loading } = githubContext;
+
   const [text, setText] = useState('');
 
   const onSubmit = e => {
@@ -11,7 +15,7 @@ const Search = ({ searchUsers, clearUsers, showClear, setAlert }) => {
     if (text === '') {
       setAlert('Please enter something', 'light');
     } else {
-      searchUsers(text);
+      githubContext.searchUsers(text);
       setText('');
     }
   };
@@ -35,7 +39,7 @@ const Search = ({ searchUsers, clearUsers, showClear, setAlert }) => {
         />
       </form>
 
-      {showClear && (
+      {users.length > 0 && (
         <button className='btn btn-light btn-block' onClick={clearUsers}>
           Clear
         </button>
@@ -46,9 +50,7 @@ const Search = ({ searchUsers, clearUsers, showClear, setAlert }) => {
 
 Search.propTypes = {
   // ptfr
-  searchUsers: PropTypes.func.isRequired,
-  clearUsers: PropTypes.func.isRequired,
-  showClear: PropTypes.bool.isRequired,
+
   setAlert: PropTypes.func.isRequired
 };
 
