@@ -5,7 +5,7 @@ import GithubContext from '../../context/github/githubContext';
 // rafce -- React Arrow Function Component with export default at the End
 const Search = ({ setAlert }) => {
   const githubContext = useContext(GithubContext);
-  const { users, clearUsers, loading } = githubContext;
+  const { users, clearUsers } = githubContext;
 
   const [text, setText] = useState('');
 
