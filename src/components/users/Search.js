@@ -1,11 +1,15 @@
 import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types'; // impt
+
 import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext';
 
 // rafce -- React Arrow Function Component with export default at the End
-const Search = ({ setAlert }) => {
+const Search = () => {
   const githubContext = useContext(GithubContext);
-  const { users, clearUsers } = githubContext;
+  const { users, clearUsers, searchUsers } = githubContext;
+
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
 
   const [text, setText] = useState('');
 
@@ -15,7 +19,7 @@ const Search = ({ setAlert }) => {
     if (text === '') {
       setAlert('Please enter something', 'light');
     } else {
-      githubContext.searchUsers(text);
+      searchUsers(text);
       setText('');
     }
   };
@@ -46,12 +50,6 @@ const Search = ({ setAlert }) => {
       )}
     </div>
   );
-};
-
-Search.propTypes = {
-  // ptfr
-
-  setAlert: PropTypes.func.isRequired
 };
 
 export default Search;
